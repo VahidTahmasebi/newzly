@@ -5,11 +5,15 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
+import noImage from "@/app/assets/images/no-image.webp";
+
 import { IArticles } from "@/types/IArticles";
 
 import { useGetArticles } from "@/hooks/useArticles";
 
 import toLocalDateShort from "@/utils/toLocalDateShort";
+
+import Loader from "@/ui/Loader";
 
 const Articles: FC = () => {
   const searchParams = useSearchParams();
@@ -17,33 +21,37 @@ const Articles: FC = () => {
   const { isLoading, articles }: { isLoading: boolean; articles: IArticles[] } =
     useGetArticles(searchParams);
 
+  if (isLoading) return <Loader />;
+
   return (
     <>
       {articles &&
         articles.map((article: IArticles, index: number) => {
-          const hostname: string = new URL(article.url).hostname;
+          const hostname: string = new URL(article?.url).hostname;
 
           return (
             <div
               key={index}
               className="flex flex-col justify-around col-span-1 gap-y-2 p-4 border rounded-xl text-xs shadow-md">
-              {/* <Link href={article?.url}>
+              <Link href={article?.url}>
                 <Image
-                      src={
-                        article.urlToImage
-                          ? article.urlToImage
-                          : "/public/vercel.svg"
-                      }
-                      alt={article.title}
-                      width={0}
-                      height={0}
-                      sizes="100vw"
-                      className="w-full h-full"
-                    />
-              </Link> */}
+                  src={
+                    article?.urlToImage !== null ? article?.urlToImage : noImage
+                  }
+                  alt={article?.title}
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  className="w-full h-full"
+                />
+              </Link>
               <div className="flex items-center gap-2">
                 <Image
-                  src={`https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://${hostname}&size=16`}
+                  src={
+                    article?.url === null
+                      ? noImage
+                      : `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://${hostname}&size=16`
+                  }
                   alt={article?.source?.name}
                   width={0}
                   height={0}
