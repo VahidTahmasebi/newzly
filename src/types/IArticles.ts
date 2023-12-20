@@ -3,8 +3,8 @@ export interface IArticles {
   author: string | null;
   title: string;
   description: string | null;
-  url: string | null;
-  urlToImage: string;
-  publishedAt: Date;
+  url: string;
+  urlToImage: string | null;
+  publishedAt: string;
   content: string | null;
 }
