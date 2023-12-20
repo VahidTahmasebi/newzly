@@ -24,7 +24,7 @@ export default function RootLayout({
           <header className="my-5 text-center">
             <h1 className="text-xl font-bold">American news</h1>
           </header>
-          <main className="xl:max-w-7xl container mx-auto px-6">
+          <main className="xl:max-w-7xl container my-7 mx-auto px-6">
             {children}
           </main>
         </Providers>

@@ -21,7 +21,12 @@ const Articles: FC = () => {
   const { isLoading, articles }: { isLoading: boolean; articles: IArticles[] } =
     useGetArticles(searchParams);
 
-  if (isLoading) return <Loader />;
+  if (isLoading)
+    return (
+      <div className="grid-cols-3 col-span-4 flex justify-center items-center">
+        <Loader />
+      </div>
+    );
 
   return (
     <>

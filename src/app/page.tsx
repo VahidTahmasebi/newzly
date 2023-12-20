@@ -18,14 +18,14 @@ const categories: ICategory[] = [
 const Home: FC = () => {
   return (
     <main>
-      <div className="grid grid-cols-5">
+      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5">
         <div className="space-y-5">
           <p className="font-bold">Categories</p>
           <aside className="flex flex-col gap-y-4">
             <ArticlesFilter categories={categories} />
           </aside>
         </div>
-        <main className="grid grid-cols-3 col-span-4 gap-4">
+        <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 col-span-1 sm:col-span-3 md:col-span-4 gap-4">
           <Articles />
         </main>
       </div>
